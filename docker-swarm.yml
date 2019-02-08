@@ -1,30 +1,40 @@
-version: "3"
+version: "3.7"
+
 services:
   pg_master:
-    image: 2hamed/pg_master
+    image: bitc0d/pg-master
     volumes:
       - pg_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=hamed
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=hamed
-      - PG_REP_USER=rep
-      - PG_REP_PASSWORD=123456
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=dbtest
+      - PG_REP_USER=user_rep
+      - PG_REP_PASSWORD=password_rep
     networks:
-      default:
-        aliases:
-          - pg_cluster
+      - pg-net
+
   pg_slave:
-    image: 2hamed/pg_slave
+    image: bitc0d/pg-slave
+    volumes:
+      - pg_slave:/var/lib/postgresql/data
     environment:
-      - POSTGRES_USER=hamed
-      - POSTGRES_PASSWORD=123456
-      - POSTGRES_DB=hamed
-      - PG_REP_USER=rep
-      - PG_REP_PASSWORD=123456
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=dbtest
+      - PG_REP_USER=user_rep
+      - PG_REP_PASSWORD=password_rep
     networks:
-      default:
-        aliases:
-          - pg_cluster
+      - pg-net
+
+networks:
+  pg-net:
+    name: pg-net
+
 volumes:
   pg_data:
+    name: pg_data
+    driver: local
+  pg_slave:
+    name: pg_slave1
+    driver: local

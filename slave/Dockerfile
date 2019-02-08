@@ -1,6 +1,6 @@
-FROM postgres:9.6-alpine
+FROM postgres:11.1-alpine
 
-ENV GOSU_VERSION 1.10
+ENV GOSU_VERSION 1.11
 
 ADD ./gosu /usr/bin/
 RUN chmod +x /usr/bin/gosu
