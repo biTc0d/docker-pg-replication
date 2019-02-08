@@ -1,3 +1,9 @@
-# PostgresSql Replication for Docker
+# PostgreSQL Replication for Docker
 
-Read this [blog post](https://medium.com/@2hamed/replicating-postgres-inside-docker-the-how-to-3244dc2305be).
+These images are using *PostgreSQL* **11.1** with *gosu* **1.11**.
+
+### How to use this stack:
+Simple create the stack with the bellow command
+*  `stack deploy -c docker-swarm.yml my_pg_replication`
+
+**P.S.** You can change the file to satisfy your needs.
